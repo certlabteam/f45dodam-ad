@@ -23,7 +23,10 @@ fbq('track', 'PageView');
 <style>
 :root{
   --bg:#0f0f10; --panel:#19191b; --fg:#f4f2ee; --muted:#a8a39c;
-  --accent:#ff3b30; --accent-2:#ffd479; --line:#2a2a2c;
+  /* F45 공식 브랜드 컬러 — Monza Red #D6001C · Valhalla Navy #211551 */
+  --f45-navy:#211551;
+  --accent:#D6001C; --accent-2:#9b93d9; /* --accent-2는 다크 배경 위 텍스트용으로 네이비를 밝힌 톤 */
+  --line:#2a2a2c;
   --font-display:'Archivo Black', 'Pretendard', system-ui, sans-serif;
   --font-body:'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
 }
@@ -46,7 +49,7 @@ header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
   background:var(--accent);color:#fff;text-decoration:none;white-space:nowrap}
 
 /* ---- 긴급 띠 ---- */
-.promo-strip{background:var(--accent-2);color:#1a1200;text-align:center;
+.promo-strip{background:var(--f45-navy);color:#fff;text-align:center;
   font-size:12.5px;font-weight:700;padding:7px 12px;letter-spacing:-.2px}
 
 /* ---- 히어로 ---- */
@@ -119,17 +122,24 @@ h2{font-family:var(--font-display);font-size:22px;letter-spacing:-.3px;margin:0 
 .car-btn:active{background:var(--line)}
 .hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
 
-/* ---- 후기 캐러셀 ---- */
-.rev-card{flex:0 0 72%;max-width:300px;scroll-snap-align:start;background:var(--panel);
-  border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;
+/* ---- 후기 캐러셀 (네이버 플레이스 리뷰 스타일) ---- */
+.rev-card{flex:0 0 78%;max-width:300px;scroll-snap-align:start;background:var(--panel);
+  border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;
   flex-direction:column;gap:10px;min-width:0}
-.rev-stars{color:var(--accent-2);font-size:14px;letter-spacing:1px}
-.rev-text{font-size:14px;line-height:1.55;flex:1;margin:0}
-.rev-foot{display:flex;justify-content:space-between;align-items:center;
-  font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
-.rev-tags{display:flex;flex-wrap:wrap;gap:6px}
-.rev-tags span{font-size:11px;background:rgba(255,212,121,.1);color:var(--accent-2);
-  padding:3px 8px;border-radius:999px}
+.rev-head{display:flex;align-items:center;gap:10px}
+.rev-avatar{width:36px;height:36px;border-radius:50%;flex:0 0 auto;
+  background:linear-gradient(135deg,var(--accent),var(--f45-navy));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:14px;font-family:var(--font-display)}
+.rev-id{flex:1;min-width:0}
+.rev-name{font-size:13.5px;font-weight:700;color:var(--fg);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rev-date{font-size:11.5px;color:var(--muted)}
+.rev-stars{color:#ffc224;font-size:13px;letter-spacing:1px;flex:0 0 auto}
+.rev-text{font-size:14px;line-height:1.55;flex:1;margin:0;color:var(--fg)}
+.rev-tags{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--line);padding-top:10px}
+.rev-tags span{font-size:11px;background:rgba(155,147,217,.14);color:var(--accent-2);
+  padding:4px 10px;border-radius:999px;font-weight:600}
 
 /* ---- 본사 운동사진 캐러셀 ---- */
 .hq-card{flex:0 0 72%;max-width:300px;scroll-snap-align:start;border-radius:16px;
@@ -142,8 +152,8 @@ h2{font-family:var(--font-display);font-size:22px;letter-spacing:-.3px;margin:0 
 .trust .big span{font-size:16px;color:var(--muted);font-family:var(--font-body)}
 
 /* ---- 인스타 ---- */
-.insta-banner{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#ff3b30,#ffd479);
-  border-radius:16px;padding:18px;text-decoration:none;color:#1a1200}
+.insta-banner{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--accent),var(--f45-navy));
+  border-radius:16px;padding:18px;text-decoration:none;color:#fff}
 .insta-banner .ic{font-size:26px}
 .insta-banner b{display:block;font-size:15px}
 .insta-banner span{font-size:12.5px;opacity:.85}
@@ -154,7 +164,7 @@ h2{font-family:var(--font-display);font-size:22px;letter-spacing:-.3px;margin:0 
 .final p{color:var(--muted);margin-bottom:26px}
 .cta-big{display:inline-flex;align-items:center;gap:8px;background:var(--accent);
   color:#fff;text-decoration:none;font-weight:800;font-size:17px;
-  padding:18px 32px;border-radius:999px;box-shadow:0 8px 24px rgba(255,59,48,.35)}
+  padding:18px 32px;border-radius:999px;box-shadow:0 8px 24px rgba(214,0,28,.35)}
 .small-note{margin-top:14px;font-size:12.5px;color:var(--muted)}
 
 footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
@@ -307,51 +317,69 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
       <div class="car-track" id="revTrack">
 
         <article class="rev-card">
-          <div class="rev-stars">★★★★★</div>
+          <div class="rev-head">
+            <div class="rev-avatar">R</div>
+            <div class="rev-id"><div class="rev-name">rla****</div><div class="rev-date">방문 9.29</div></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
           <p class="rev-text">재밌게 운동할 수 있어서 너무너무 좋아요! 자세도 꼼꼼히 봐주시고
             처음이여도 충분히 따라갈 수 있도록 해주셔서 좋았습니다!!</p>
           <div class="rev-tags"><span>친절해요</span><span>자세를 꼼꼼히 봐주세요</span></div>
-          <div class="rev-foot"><span>rla****</span><span>방문 9.29</span></div>
         </article>
 
         <article class="rev-card">
-          <div class="rev-stars">★★★★★</div>
+          <div class="rev-head">
+            <div class="rev-avatar">귤</div>
+            <div class="rev-id"><div class="rev-name">귤59</div><div class="rev-date">방문 9.16</div></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
           <p class="rev-text">F45 처음 해봤는데 다같이 운동하니까 재밌어요! 처음에 자세도
             잘 알려주셔서 어렵지 않게 운동했습니다!</p>
           <div class="rev-tags"><span>수업이 체계적이에요</span><span>친절해요</span></div>
-          <div class="rev-foot"><span>귤59</span><span>방문 9.16</span></div>
         </article>
 
         <article class="rev-card">
-          <div class="rev-stars">★★★★★</div>
+          <div class="rev-head">
+            <div class="rev-avatar">루</div>
+            <div class="rev-id"><div class="rev-name">루시1886</div><div class="rev-date">방문 9.22</div></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
           <p class="rev-text">집에서 혼자 운동하다가 에너지부터 건강한 분들과 함께
             체계적이고 효율적으로 운동할 수 있다는 점이 너무 좋았습니다.</p>
           <div class="rev-tags"><span>수업이 체계적이에요</span><span>자세를 꼼꼼히 봐주세요</span></div>
-          <div class="rev-foot"><span>루시1886</span><span>방문 9.22</span></div>
         </article>
 
         <article class="rev-card">
-          <div class="rev-stars">★★★★★</div>
+          <div class="rev-head">
+            <div class="rev-avatar">후</div>
+            <div class="rev-id"><div class="rev-name">후라이드치킨30</div><div class="rev-date">방문 9.8</div></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
           <p class="rev-text">운동을 평소에 하지 않는 편이라 체험이어도 따라갈 수 있을지
             걱정했는데, 친절하게 자세 하나하나 알려주셔서 잘 따라할 수 있었습니다.</p>
           <div class="rev-tags"><span>친절해요</span><span>시설이 깔끔해요</span></div>
-          <div class="rev-foot"><span>후라이드치킨30</span><span>방문 9.8</span></div>
         </article>
 
         <article class="rev-card">
-          <div class="rev-stars">★★★★★</div>
+          <div class="rev-head">
+            <div class="rev-avatar">A</div>
+            <div class="rev-id"><div class="rev-name">asdf5960</div><div class="rev-date">방문 9.8</div></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
           <p class="rev-text">화면에 해야할 동작들이 나와서 따라하기 쉬웠습니다. 짧은 시간에
             불태우는 느낌이라 다음엔 정식으로 할 의향 있습니다!</p>
           <div class="rev-tags"><span>자세를 꼼꼼히 봐주세요</span><span>기구가 다양해요</span></div>
-          <div class="rev-foot"><span>asdf5960</span><span>방문 9.8</span></div>
         </article>
 
         <article class="rev-card">
-          <div class="rev-stars">★★★★★</div>
+          <div class="rev-head">
+            <div class="rev-avatar">F</div>
+            <div class="rev-id"><div class="rev-name">Fbdfuq</div><div class="rev-date">방문 9.1</div></div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
           <p class="rev-text">완전 왕초보인데 엄청 친절히 알려주시고 자세도 꼼꼼히 봐주셔서
             재밌게 운동했어요!! 45분 완전 알차게 운동 잘 한 것 같아요 추천합니다~!!</p>
           <div class="rev-tags"><span>친절해요</span><span>상담이 자세해요</span></div>
-          <div class="rev-foot"><span>Fbdfuq</span><span>방문 9.1</span></div>
         </article>
 
       </div>
