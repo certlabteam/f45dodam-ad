@@ -23,9 +23,10 @@ fbq('track', 'PageView');
 <style>
 :root{
   --bg:#0f0f10; --panel:#19191b; --fg:#f4f2ee; --muted:#a8a39c;
-  /* F45 공식 브랜드 컬러 — Monza Red #D6001C · Valhalla Navy #211551 */
+  /* F45 공식 브랜드 컬러 — Monza Red #D6001C · Valhalla Navy #211551(파란색) */
   --f45-navy:#211551;
-  --accent:#D6001C; --accent-2:#9b93d9; /* --accent-2는 다크 배경 위 텍스트용으로 네이비를 밝힌 톤 */
+  --accent:#D6001C; --accent-2:#5b6fe8; /* --accent-2: 다크 배경 위에서도 또렷하게 보이는 파란색(네이비를 밝힌 톤) */
+  --naver-green:#03C75A;
   --line:#2a2a2c;
   --font-display:'Archivo Black', 'Pretendard', system-ui, sans-serif;
   --font-body:'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
@@ -122,13 +123,13 @@ h2{font-family:var(--font-display);font-size:22px;letter-spacing:-.3px;margin:0 
 .car-btn:active{background:var(--line)}
 .hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
 
-/* ---- 후기 캐러셀 (네이버 플레이스 리뷰 스타일) ---- */
+/* ---- 후기 캐러셀 (네이버 플레이스 리뷰 색) ---- */
 .rev-card{flex:0 0 78%;max-width:300px;scroll-snap-align:start;background:var(--panel);
-  border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;
+  border:1px solid rgba(3,199,90,.35);border-radius:16px;padding:16px;display:flex;
   flex-direction:column;gap:10px;min-width:0}
 .rev-head{display:flex;align-items:center;gap:10px}
 .rev-avatar{width:36px;height:36px;border-radius:50%;flex:0 0 auto;
-  background:linear-gradient(135deg,var(--accent),var(--f45-navy));
+  background:var(--naver-green);
   display:flex;align-items:center;justify-content:center;
   color:#fff;font-weight:800;font-size:14px;font-family:var(--font-display)}
 .rev-id{flex:1;min-width:0}
@@ -138,8 +139,11 @@ h2{font-family:var(--font-display);font-size:22px;letter-spacing:-.3px;margin:0 
 .rev-stars{color:#ffc224;font-size:13px;letter-spacing:1px;flex:0 0 auto}
 .rev-text{font-size:14px;line-height:1.55;flex:1;margin:0;color:var(--fg)}
 .rev-tags{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--line);padding-top:10px}
-.rev-tags span{font-size:11px;background:rgba(155,147,217,.14);color:var(--accent-2);
+.rev-tags span{font-size:11px;background:rgba(3,199,90,.14);color:var(--naver-green);
   padding:4px 10px;border-radius:999px;font-weight:600}
+.rev-more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  background:var(--naver-green);color:#fff;text-decoration:none;font-weight:700;
+  font-size:13.5px;padding:11px 18px;border-radius:999px}
 
 /* ---- 본사 운동사진 캐러셀 ---- */
 .hq-card{flex:0 0 72%;max-width:300px;scroll-snap-align:start;border-radius:16px;
@@ -389,6 +393,9 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
       </div>
     </div>
     <p class="hint">← 손가락으로 넘기거나 화살표를 눌러 더 보기 →</p>
+    <div style="text-align:center">
+      <a class="rev-more" href="https://pcmap.place.naver.com/place/1331400496/review/visitor" target="_blank" rel="noopener">네이버에서 후기 더 보러가기 →</a>
+    </div>
   </section>
 
   <section>
