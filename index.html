@@ -518,13 +518,29 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
 <script>
 (function(){
   var setCode = new URLSearchParams(location.search).get('s') || '';
+  function 쿠키(이름){
+    var m = document.cookie.match(new RegExp('(?:^|; )' + 이름 + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
   document.querySelectorAll('[data-naver-cta]').forEach(function(a){
     if (setCode) {
       var sep = a.href.indexOf('?') === -1 ? '?' : '&';
       a.href = a.href + sep + 'area=meta' + setCode;
     }
     a.addEventListener('click', function(){
-      if (window.fbq) fbq('track', 'InitiateCheckout', setCode ? {set: setCode} : {});
+      var id = 'ic-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+      if (window.fbq) fbq('track', 'InitiateCheckout', setCode ? {set: setCode} : {}, {eventID: id});
+      try {
+        var body = JSON.stringify({
+          event: 'InitiateCheckout',
+          event_id: id,
+          set: setCode,
+          fbp: 쿠키('_fbp'),
+          fbc: 쿠키('_fbc'),
+          url: location.href
+        });
+        navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([body], {type: 'text/plain'}));
+      } catch(e) {}
     });
   });
 })();
