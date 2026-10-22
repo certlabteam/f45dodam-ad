@@ -517,7 +517,9 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
 
 <script>
 (function(){
-  var setCode = new URLSearchParams(location.search).get('s') || '';
+  var qs = new URLSearchParams(location.search);
+  var setCode = qs.get('s') || '';
+  var isTest = qs.get('test') === '1';
   function 쿠키(이름){
     var m = document.cookie.match(new RegExp('(?:^|; )' + 이름 + '=([^;]*)'));
     return m ? decodeURIComponent(m[1]) : '';
@@ -529,12 +531,13 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
     }
     a.addEventListener('click', function(){
       var id = 'ic-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-      if (window.fbq) fbq('track', 'InitiateCheckout', setCode ? {set: setCode} : {}, {eventID: id});
+      if (window.fbq && !isTest) fbq('track', 'InitiateCheckout', setCode ? {set: setCode} : {}, {eventID: id});
       try {
         var body = JSON.stringify({
           event: 'InitiateCheckout',
           event_id: id,
           set: setCode,
+          test: isTest,
           fbp: 쿠키('_fbp'),
           fbc: 쿠키('_fbc'),
           url: location.href
