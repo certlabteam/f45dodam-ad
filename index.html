@@ -520,6 +520,8 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
   var qs = new URLSearchParams(location.search);
   var setCode = qs.get('s') || '';
   var isTest = qs.get('test') === '1';
+  // A배너 QR(?src=abanner&s=ab1·ab2) 같은 광고 아닌 길은 메타 전환으로 보내지 않는다 — 메타가 광고 안 본 사람까지 배우지 않게(2026-10-24)
+  var fromMeta = (qs.get('src') || 'meta') === 'meta';
   function 쿠키(이름){
     var m = document.cookie.match(new RegExp('(?:^|; )' + 이름 + '=([^;]*)'));
     return m ? decodeURIComponent(m[1]) : '';
@@ -527,16 +529,17 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
   document.querySelectorAll('[data-naver-cta]').forEach(function(a){
     if (setCode) {
       var sep = a.href.indexOf('?') === -1 ? '?' : '&';
-      a.href = a.href + sep + 'area=meta' + setCode;
+      a.href = a.href + sep + 'area=' + (fromMeta ? 'meta' : '') + setCode;
     }
     a.addEventListener('click', function(){
       var id = 'ic-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-      if (window.fbq && !isTest) fbq('track', 'InitiateCheckout', setCode ? {set: setCode} : {}, {eventID: id});
+      if (window.fbq && !isTest && fromMeta) fbq('track', 'InitiateCheckout', setCode ? {set: setCode} : {}, {eventID: id});
       try {
         var body = JSON.stringify({
           event: 'InitiateCheckout',
           event_id: id,
           set: setCode,
+          src: qs.get('src') || 'meta',
           test: isTest,
           fbp: 쿠키('_fbp'),
           fbc: 쿠키('_fbc'),
