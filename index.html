@@ -546,6 +546,25 @@ footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));
   var qs = new URLSearchParams(location.search);
   var setCode = qs.get('s') || '';
   var isTest = qs.get('test') === '1';
+  var sendArrive = true;
+  try {
+    if (sessionStorage.getItem('f45arrive')) sendArrive = false;
+    else sessionStorage.setItem('f45arrive', '1');
+  } catch(e) {}
+  if (sendArrive) {
+    try {
+      var arrive = {
+        event: 'Arrive',
+        event_id: 'arrive-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+        url: location.href,
+        src: qs.get('src') || '',
+        set: setCode
+      };
+      if (isTest) arrive.test = true;
+      // 예약 버튼과 같은 방식(text/plain sendBeacon) — CORS 사전 요청 없이 보낸다
+      navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(arrive)], {type: 'text/plain'}));
+    } catch(e) {}
+  }
   // A배너 QR(?src=abanner&s=ab1·ab2) 같은 광고 아닌 길은 메타 전환으로 보내지 않는다 — 메타가 광고 안 본 사람까지 배우지 않게(2026-10-24)
   var fromMeta = (qs.get('src') || 'meta') === 'meta';
   function 쿠키(이름){
