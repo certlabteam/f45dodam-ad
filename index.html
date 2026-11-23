@@ -142,7 +142,7 @@ table.cmp th.hl-col,table.cmp td.hl-col{background:rgba(214,0,28,.06)}
 .rev-stars{color:#e8a400;font-size:13px;letter-spacing:1px;flex:0 0 auto}
 .rev-text{font-size:14px;line-height:1.55;flex:1;margin:0;color:var(--fg)}
 .rev-tags{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--line);padding-top:10px}
-.rev-tags span{font-size:11px;background:rgba(3,199,90,.12);color:#02984a;
+.rev-tags span{font-size:12px;background:rgba(3,199,90,.12);color:#02984a;
   padding:4px 10px;border-radius:999px;font-weight:600}
 .rev-more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;
   background:var(--naver-green);color:#fff;text-decoration:none;font-weight:700;
@@ -203,21 +203,49 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
 
   <section class="hero" style="border-bottom:none">
     <div class="eyebrow">세종 도담동 · 그룹 트레이닝</div>
-    <h1>45분이면<br><span class="hl">충분해</span>요</h1>
+    <h1 id="heroTitle">45분이면<br><span class="hl">충분해</span>요</h1>
     <div class="stat-row">
       <div class="stat"><b>4.92</b><span>네이버 평점</span></div>
       <div class="stat"><b>1,511</b><span>방문자 리뷰</span></div>
       <div class="stat"><b>45분</b><span>프로그램 시간</span></div>
     </div>
-    <p class="section-sub" style="margin-top:10px">리뷰 1,511개가 같은 이야기를 합니다 — 무료로 직접 확인해보세요</p>
-    <a class="cta-big" href="https://booking.naver.com/booking/12/bizes/798758/items/4739573" data-naver-cta="1" style="margin-top:14px">
+    <p class="section-sub" id="heroSub" style="margin-top:10px">리뷰 1,511개가 같은 이야기를 합니다 — 무료로 직접 확인해보세요</p>
+    <a class="cta-big" id="heroCta" href="https://booking.naver.com/booking/12/bizes/798758/items/4739573" data-naver-cta="1" style="margin-top:14px">
       네이버 예약으로 무료체험 신청 →
     </a>
     <p class="small-note">무료 · 결제·카드 등록 없음</p>
+    <p class="small-note" style="margin-top:6px">예약 전에 궁금하면 <a href="https://talk.naver.com/w44f5y" target="_blank" rel="noopener" data-talk="1" style="color:var(--accent-2);font-weight:700">네이버 톡톡</a> · <a href="tel:050713592643" data-tel="1" style="color:var(--accent-2);font-weight:700">전화 0507-1359-2643</a></p>
     <p class="lede" style="margin-top:18px">40초 운동, 20초 휴식. 혼자 하면 작심삼일인 운동도
       같이 땀 흘리는 사람들 속에서는 계속하게 됩니다.
       코치가 스테이션마다 돌면서 자세를 봐 드립니다 — 오늘 처음이어도 괜찮습니다.</p>
     <p class="section-sub">사망 위험 감소 과학적 근거 · 2~3명이 함께 · 초보 환영 — 자세한 내용은 아래에 있습니다</p>
+  </section>
+
+  <section id="firstday">
+    <h2>처음 오는 날, 이렇게 진행돼요</h2>
+    <p class="section-sub">운동을 오래 쉬었어도 괜찮아요. 코치가 처음부터 같이 합니다.</p>
+    <p class="section-sub" style="margin:0 0 10px;font-weight:700;color:var(--fg)">체험 전</p>
+    <div class="how">
+      <div class="how-item"><div class="how-num">1</div><div><h3>준비</h3><p>체험 전날, 준비물과 운동 안내를 링크로 보내 드려요.</p></div></div>
+      <div class="how-item"><div class="how-num">2</div><div><h3>설문</h3><p>예약하면 짧은 설문을 보내 드려요. 아픈 곳을 알려 주시면 못 하는 동작은 다른 동작으로 바꿔 드려요.</p></div></div>
+    </div>
+    <p class="section-sub" style="margin:18px 0 10px;font-weight:700;color:var(--fg)">오는 날</p>
+    <div class="how">
+      <div class="how-item"><div class="how-num">3</div><div><h3>스튜디오 안내</h3><p>안내를 위해 10분 먼저 와 주세요. 외부 신발은 신발장에 넣고 실내 운동화로 갈아 신어요. 다칠 수 있어 늦으면 수업에 들어갈 수 없어요.</p></div></div>
+      <div class="how-item"><div class="how-num">4</div><div><h3>준비운동</h3><p>코치와 같이 몸을 풀면서 오늘 할 동작을 미리 익혀요.</p></div></div>
+      <div class="how-item"><div class="how-num">5</div><div><h3>본운동</h3><p>40초 운동, 20초 휴식. 힘들면 쉬어도 돼요. 코치가 스테이션마다 자세를 봐 드려요.</p></div></div>
+      <div class="how-item"><div class="how-num">6</div><div><h3>마무리 스트레칭</h3><p>같이 스트레칭하며 끝내요. 체험한 날 등록하면 체험 할인이 들어가요.</p></div></div>
+    </div>
+    <div class="loc-box">
+      <b>주차</b> 건물 주차 4시간 무료 — 운동 끝나고 데스크 휴대폰에서 차량 번호만 등록<br>
+      <b>찾아오는 길</b> 건물 안에서 찾기가 조금 어려워요 — <a href="https://www.notion.so/f45dodam/F45-4347cbb964734ee0b82790a5e6c9ef69" target="_blank" rel="noopener" style="color:var(--accent-2);font-weight:700">찾아오는 길 영상</a>
+    </div>
+    <div class="loc-box">
+      <b>무료체험 대상</b><br>
+      · 세종에 살거나 세종에서 일하시는 분(명함·신분증 지참)<br>
+      · F45 다른 지점을 다녀 보지 않으신 분<br>
+      · 체험 후 네이버 방문 리뷰를 남겨 주실 분
+    </div>
   </section>
 
   <section>
@@ -491,18 +519,18 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
     <p class="section-sub">F45 글로벌 본사 사진</p>
     <div class="carousel">
       <div class="car-track" id="hqTrack">
-        <div class="hq-card"><img src="images/hq/hq01.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq02.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq03.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq04.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq05.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq06.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq07.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq08.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq09.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq10.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq11.jpg" alt="F45 운동 모습" loading="lazy"></div>
-        <div class="hq-card"><img src="images/hq/hq12.jpg" alt="F45 운동 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq09.jpg" alt="여성 회원이 케틀벨로 한 다리 데드리프트를 하는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq04.jpg" alt="남성 회원이 케틀벨을 드는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq02.jpg" alt="중년 회원이 덤벨을 머리 위로 드는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq08.jpg" alt="여성 회원이 박스에 앉아 덤벨을 드는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq10.jpg" alt="남성 회원이 바벨을 드는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq06.jpg" alt="코치가 회원 자세를 잡아 주는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq03.jpg" alt="남녀 회원이 덤벨 운동을 하는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq11.jpg" alt="남성 회원이 바벨 데드리프트를 하는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq01.jpg" alt="회원들이 운동하는 F45 스튜디오" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq05.jpg" alt="회원들이 덤벨 운동을 하는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq07.jpg" alt="남성 회원이 화면을 보며 운동하는 모습" loading="lazy"></div>
+        <div class="hq-card"><img src="images/hq/hq12.jpg" alt="여러 회원이 함께 운동하는 모습" loading="lazy"></div>
       </div>
       <div class="car-nav">
         <button class="car-btn" onclick="scrollCar('hqTrack',-1)" aria-label="이전 사진">‹</button>
@@ -565,6 +593,43 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
       navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(arrive)], {type: 'text/plain'}));
     } catch(e) {}
   }
+  // 카카오 광고로 온 사람은 첫 줄을 광고 문구와 맞춘다(크리스 11-23 시안 QtkMWxiZ4B1uVAiQMibWdT ①)
+  if ((qs.get('src') || '') === 'kakao') {
+    var ht = document.getElementById('heroTitle'), hs = document.getElementById('heroSub');
+    if (ht) ht.innerHTML = '운동 처음이어도<br><span class="hl">괜찮아</span>요';
+    if (hs) hs.textContent = '코치가 옆에서 자세를 봐 드려요 — 리뷰 1,511개가 같은 이야기를 합니다';
+  }
+  // 큰 신청 단추가 화면에 보이는 동안은 아래 고정 띠를 숨긴다 — 한 화면에 신청 단추 하나만
+  var sticky = document.querySelector('.sticky-cta'), heroCta = document.getElementById('heroCta');
+  if (sticky && heroCta && 'IntersectionObserver' in window) {
+    sticky.style.transition = 'transform .2s ease';
+    new IntersectionObserver(function(es){
+      sticky.style.transform = es[0].isIntersecting ? 'translateY(110%)' : 'none';
+    }).observe(heroCta);
+  }
+  // 머문 시간·스크롤 기록(크리스 11-23 「갭 어케 줄이지」 → 메뉴 「머문 시간·스크롤 기록」) — 도착한 사람이 읽고 갔는지, 바로 나갔는지 가른다.
+  // 단계마다 세션에 한 번: 5초·20초 머묾 / 절반·끝까지 내림. 메타로는 안 보낸다(허브가 기록만).
+  var ENGAGE_ON = true;   // 허브가 11-23 18:00 Engage 받기 켬(f45_engage.log · 메타로는 안 보냄)
+  function engage(stage){
+    if (!ENGAGE_ON) return;
+    var k = 'f45eng-' + stage;
+    try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch(e) {}
+    try {
+      var ev = { event: 'Engage', stage: stage, event_id: 'eng-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
+                 src: qs.get('src') || '', set: setCode, url: location.href };
+      if (isTest) ev.test = true;
+      navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(ev)], {type: 'text/plain'}));
+    } catch(e) {}
+  }
+  setTimeout(function(){ if (document.visibilityState === 'visible') engage('5s'); }, 5000);
+  setTimeout(function(){ if (document.visibilityState === 'visible') engage('20s'); }, 20000);
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h <= 0) return;
+    var p = window.scrollY / h;
+    if (p >= 0.5) engage('half');
+    if (p >= 0.9) engage('end');
+  }, {passive: true});
   // A배너 QR(?src=abanner&s=ab1·ab2) 같은 광고 아닌 길은 메타 전환으로 보내지 않는다 — 메타가 광고 안 본 사람까지 배우지 않게(2026-10-24)
   var fromMeta = (qs.get('src') || 'meta') === 'meta';
   function 쿠키(이름){
