@@ -647,7 +647,8 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
     a.addEventListener('click', function(){
       var id = 'ic-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
       if (window.fbq && !isTest && fromMeta) fbq('track', 'InitiateCheckout', setCode ? {set: setCode} : {}, {eventID: id});
-      if (window.kakaoPixel && !isTest) { try { kakaoPixel('4542501865995155718').participation(); } catch(e) {} }
+      // 카카오 전환 캠페인 최적화 이벤트 = 「서비스신청」(signUp) — 11-23
+      if (window.kakaoPixel && !isTest) { try { kakaoPixel('4542501865995155718').signUp('무료체험'); } catch(e) {} }
       try {
         var body = JSON.stringify({
           event: 'InitiateCheckout',
