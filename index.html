@@ -172,6 +172,19 @@ table.cmp th.hl-col,table.cmp td.hl-col{background:rgba(214,0,28,.06)}
   color:#fff;text-decoration:none;font-weight:800;font-size:17px;
   padding:18px 32px;border-radius:999px;box-shadow:0 8px 24px rgba(3,199,90,.3)}
 .small-note{margin-top:14px;font-size:12.5px;color:var(--muted)}
+/* 네이버 없이 신청 — 글로폭스 리드 등록(크리스 11-24) */
+.cta-alt{display:inline-flex;align-items:center;justify-content:center;background:var(--panel);color:var(--fg);
+  border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:999px;margin-top:10px}
+/* 크리스 11-24 「전화번호만 남기고 신청하기 너무 커 버튼이」 — 큰 초록 단추보다 한 단계 작은 보조 단추로 */
+.lead-dim{position:fixed;inset:0;z-index:50;background:rgba(25,24,28,.5);display:flex;align-items:flex-end;justify-content:center}
+.lead-dim[hidden]{display:none}
+.lead-sheet{background:var(--panel);width:100%;max-width:560px;border-radius:18px 18px 0 0;
+  padding:18px 16px calc(16px + env(safe-area-inset-bottom,0px));max-height:92vh;overflow:auto}
+.lead-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.lead-head b{font-size:17px}
+.lead-head button{border:0;background:none;font-size:22px;line-height:1;padding:6px 8px;cursor:pointer;color:var(--fg)}
+.lead-sheet p{font-size:13.5px;color:var(--muted);margin:0 0 10px;line-height:1.55}
+.lead-sheet iframe{width:100%;height:560px;border:0;border-radius:12px;background:#fff}
 
 footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 고정 신청 버튼(.sticky-cta)에 사업자 정보가 가리지 않게 */
   text-align:center;font-size:12px;color:var(--muted)}
@@ -216,6 +229,7 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
     <a class="cta-big" id="heroCta" href="https://booking.naver.com/booking/12/bizes/798758/items/4739573" data-naver-cta="1" style="margin-top:14px">
       네이버 예약으로 무료체험 신청 →
     </a>
+    <a class="cta-alt" href="#lead" data-lead-open="1">전화번호만 남기고 신청하기</a>
     <p class="small-note">무료 · 결제·카드 등록 없음</p>
     <p class="small-note" style="margin-top:6px">예약 전에 궁금하면 <a href="https://talk.naver.com/w44f5y" target="_blank" rel="noopener" data-talk="1" style="color:var(--accent-2);font-weight:700">네이버 톡톡</a> · <a href="tel:050713592643" data-tel="1" style="color:var(--accent-2);font-weight:700">전화 0507-1359-2643</a></p>
     <p class="lede" style="margin-top:18px">40초 운동, 20초 휴식. 혼자 하면 작심삼일인 운동도
@@ -566,6 +580,14 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
 
 <footer>F45 도담 · 세종특별자치시<br>상호 프사오도담 · 대표 박성환 · 사업자등록번호 453-01-02999<br>세종특별자치시 보듬3로 8-20 지하1층 102호 · 0507-1359-2643</footer>
 
+<div class="lead-dim" id="leadDim" hidden>
+  <div class="lead-sheet" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+    <div class="lead-head"><b id="leadTitle">무료체험 신청</b><button type="button" id="leadClose" aria-label="닫기">✕</button></div>
+    <p>이름과 전화번호를 남겨 주시면 F45 도담이 연락드려 체험 시간을 잡아 드려요. 네이버 로그인이 필요 없어요.</p>
+    <iframe id="leadFrame" title="F45 도담 무료체험 신청" loading="lazy"></iframe>
+  </div>
+</div>
+
 <div class="sticky-cta">
   <a href="https://booking.naver.com/booking/12/bizes/798758/items/4739573" data-naver-cta="1">
     무료체험 신청하기 →
@@ -596,6 +618,24 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
       navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(arrive)], {type: 'text/plain'}));
     } catch(e) {}
   }
+  // 네이버 없이 신청 — 글로폭스 도담 지점 리드 등록을 창으로 띄운다(본사 지점 페이지 「관심 등록하기」와 같은 것). 신청 알림은 짐매니저가 텔레그램으로.
+  var leadDim = document.getElementById('leadDim'), leadFrame = document.getElementById('leadFrame');
+  var LEAD_URL = 'https://app.glofox.com/portal/#/branch/6960942b5093fe78d70366d8/lead-register';
+  function leadOpen(e){
+    if (e) e.preventDefault();
+    if (!leadFrame.getAttribute('src')) leadFrame.setAttribute('src', LEAD_URL);
+    leadDim.hidden = false; document.body.style.overflow = 'hidden';
+    try {
+      var ev = { event: 'Engage', stage: 'lead', event_id: 'lead-' + Date.now(), src: qs.get('src') || '', set: setCode, url: location.href };
+      if (isTest) ev.test = true;
+      if (ENGAGE_ON) navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(ev)], {type: 'text/plain'}));
+    } catch(err) {}
+  }
+  function leadClose(){ leadDim.hidden = true; document.body.style.overflow = ''; }
+  document.querySelectorAll('[data-lead-open]').forEach(function(a){ a.addEventListener('click', leadOpen); });
+  document.getElementById('leadClose').addEventListener('click', leadClose);
+  leadDim.addEventListener('click', function(e){ if (e.target === leadDim) leadClose(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !leadDim.hidden) leadClose(); });
   // 카카오 광고로 온 사람은 첫 줄을 광고 문구와 맞춘다(크리스 11-23 시안 QtkMWxiZ4B1uVAiQMibWdT ①)
   if ((qs.get('src') || '') === 'kakao') {
     var ht = document.getElementById('heroTitle'), hs = document.getElementById('heroSub');
