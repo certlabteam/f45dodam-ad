@@ -632,6 +632,25 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
     } catch(err) {}
   }
   function leadClose(){ leadDim.hidden = true; document.body.style.overflow = ''; }
+  // 신청 완료 신호 — 글로폭스 창이 등록 성공 때 부모 페이지로 Glofox_Lead_Details 를 보낸다(portal scripts: REGISTER_SUCCESS → sendDetailsToParent).
+  // 우리 랜딩에서 신청한 것만 잡히므로 본사 지점 페이지 리드와 구분된다. 이름·전화는 보내지 않고 출처·세트만 기록.
+  var leadDone = false;
+  window.addEventListener('message', function(e){
+    if (leadDone || !/^https:\/\/app\.glofox\.com$/.test(e.origin)) return;
+    var d = e.data || {};
+    if (d.messageType !== 'Glofox_Lead_Details') return;
+    leadDone = true;
+    window.__f45LeadDone = true;
+    try {
+      var ev = { event: 'Engage', stage: 'lead_done', event_id: 'leaddone-' + Date.now(), src: qs.get('src') || '', set: setCode, url: location.href };
+      if (isTest) ev.test = true;
+      navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(ev)], {type: 'text/plain'}));
+    } catch(err) {}
+    if (!isTest) {
+      try { if (window.kakaoPixel) kakaoPixel('4542501865995155718').signUp('리드'); } catch(err) {}
+      try { if (window.fbq && fromMeta) fbq('track', 'Lead', setCode ? {set: setCode} : {}); } catch(err) {}
+    }
+  });
   document.querySelectorAll('[data-lead-open]').forEach(function(a){ a.addEventListener('click', leadOpen); });
   document.getElementById('leadClose').addEventListener('click', leadClose);
   leadDim.addEventListener('click', function(e){ if (e.target === leadDim) leadClose(); });
