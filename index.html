@@ -641,11 +641,21 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
     if (d.messageType !== 'Glofox_Lead_Details') return;
     leadDone = true;
     window.__f45LeadDone = true;
-    try {
-      var ev = { event: 'Engage', stage: 'lead_done', event_id: 'leaddone-' + Date.now(), src: qs.get('src') || '', set: setCode, url: location.href };
-      if (isTest) ev.test = true;
-      navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(ev)], {type: 'text/plain'}));
-    } catch(err) {}
+    // 짐매니저가 글로폭스 리드와 맞춰 [도담]을 붙이게 — 신호엔 리드 번호가 없어서 전화번호 숫자(82→0)의 SHA-256 앞 16자만 ph 로(번호 자체는 안 보냄) · 11-24 크리스 메뉴 「부탁하기」
+    function send(ph){
+      try {
+        var ev = { event: 'Engage', stage: 'lead_done', event_id: 'leaddone-' + Date.now(), src: qs.get('src') || '', set: setCode, url: location.href };
+        if (ph) ev.ph = ph;
+        if (isTest) ev.test = true;
+        navigator.sendBeacon('https://gym.certlab.ai.kr/api/public/meta-event', new Blob([JSON.stringify(ev)], {type: 'text/plain'}));
+      } catch(err) {}
+    }
+    var digits = String(d.mobile || '').replace(/\D/g, '').replace(/^82/, '0');
+    if (digits && window.crypto && crypto.subtle && window.TextEncoder) {
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(digits)).then(function(buf){
+        send(Array.from(new Uint8Array(buf)).map(function(b){ return ('0' + b.toString(16)).slice(-2); }).join('').slice(0, 16));
+      }, function(){ send(''); });
+    } else send('');
     if (!isTest) {
       try { if (window.kakaoPixel) kakaoPixel('4542501865995155718').signUp('리드'); } catch(err) {}
       try { if (window.fbq && fromMeta) fbq('track', 'Lead', setCode ? {set: setCode} : {}); } catch(err) {}
