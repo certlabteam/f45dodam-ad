@@ -22,6 +22,8 @@ fbq('track', 'PageView');
 <!-- 카카오 픽셀(11-23 크리스 「전환으로 바꿔」) — 방문 + 신청 버튼(participation)을 카카오에 알린다 -->
 <script type="text/javascript" charset="UTF-8" src="https://t1.daumcdn.net/kas/static/kp.js"></script>
 <script>try { kakaoPixel('4542501865995155718').pageView(); } catch(e) {}</script>
+<!-- Microsoft Clarity 화면 녹화(크리스 11-26 · 프로젝트 「F45 도담 랜딩」 zjdunohrk9) — 왜 5초 만에 나가는지 보기 -->
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","zjdunohrk9");</script>
 <style>
 :root{
   /* 배경만 밝게 — 나머지 F45 브랜드 컬러(빨강·네이비)는 그대로 */
@@ -50,6 +52,15 @@ header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
 .bar a.cta{font-size:13px;font-weight:700;padding:9px 16px;border-radius:999px;
   background:var(--accent);color:#fff;text-decoration:none;white-space:nowrap}
 
+.why-dim{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center;z-index:60}
+.why-sheet{position:relative;width:100%;max-width:520px;background:var(--panel);border-radius:20px 20px 0 0;padding:22px 18px calc(20px + env(safe-area-inset-bottom,0px))}
+.why-x{position:absolute;right:10px;top:10px;width:44px;height:44px;border:0;background:none;font-size:18px;color:var(--muted);cursor:pointer}
+.why-q{font-size:17px;font-weight:800;margin:0 0 14px;line-height:1.4;padding-right:36px}
+.why-list{display:grid;gap:8px}
+.why-opt{min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font:inherit;font-size:15px;font-weight:600;text-align:left;padding:0 14px;color:var(--fg);cursor:pointer}
+.why-note{font-size:12.5px;color:var(--muted);margin:10px 0 0;text-align:center}
+.why-ans{font-size:15px;line-height:1.6;margin:0 0 14px}
+.why-cta{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:var(--fg);color:var(--bg);font-weight:800;text-decoration:none}
 .ka-photo{position:relative;margin:0 -20px 18px;aspect-ratio:4/3;overflow:hidden;max-width:none}
 .ka-photo img{width:100%;height:100%;object-fit:cover}
 .ka-photo span{position:absolute;left:0;right:0;top:0;padding:12px 16px 22px;color:#fff;font-weight:800;font-size:15px;background:linear-gradient(rgba(0,0,0,.55),transparent)}
@@ -587,7 +598,7 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
   </section>
 
   <section class="hero" style="border-bottom:none;padding-top:0">
-    <section style="margin-top:22px;border-top:1px solid var(--line,#e5e3ea);padding-top:16px"><h2 style="font-size:18px;margin:0 0 4px">수업 시간표</h2><div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;min-width:320px;font-variant-numeric:tabular-nums;table-layout:fixed"><tr><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;width:50px"></th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">월</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">화</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">수</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">목</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">금</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">토</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">일</th></tr>
+    <section id="timetable" style="margin-top:22px;border-top:1px solid var(--line,#e5e3ea);padding-top:16px"><h2 style="font-size:18px;margin:0 0 4px">수업 시간표</h2><div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;min-width:320px;font-variant-numeric:tabular-nums;table-layout:fixed"><tr><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;width:50px"></th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">월</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">화</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">수</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">목</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">금</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">토</th><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1">일</th></tr>
 <tr><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;font-weight:700">06:15</th><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td></tr>
 <tr><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;font-weight:700">07:05</th><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td></tr>
 <tr><th style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;font-weight:700">08:30</th><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;background:rgba(3,199,90,.12);font-weight:700;color:var(--fg,#19181c)">F45</td><td style="height:34px;padding:0 2px;border:1px solid var(--line,#e5e3ea);text-align:center;vertical-align:middle;white-space:nowrap;font-size:12.5px;line-height:1;"></td></tr>
@@ -807,6 +818,50 @@ footer{padding:24px 0 calc(110px + env(safe-area-inset-bottom,0px)); /* 아래 �
   document.querySelectorAll('[data-tel]').forEach(function(a){ a.addEventListener('click', function(){ engage('tel'); }); });
   setTimeout(function(){ if (document.visibilityState === 'visible') engage('5s'); }, 5000);
   setTimeout(function(){ if (document.visibilityState === 'visible') engage('20s'); }, 20000);
+  // 망설인 이유 한 문항 — 20초 넘게 보고 신청 안 한 사람에게 한 번만, 맨 위로 다시 올라오거나 40초 지나면 (크리스 11-26 승인 시안 6nbGemHRH8aSYN7KUXTzA2)
+  (function(){
+    var asked = false, applied = false, armed = false, deepest = 0;
+    try { asked = !!localStorage.getItem('f45why'); } catch(e) {}
+    if (asked) return;
+    document.querySelectorAll('[data-naver-cta],[data-lead-open],[data-talk],[data-tel]').forEach(function(a){ a.addEventListener('click', function(){ applied = true; }); });
+    var A = {
+      price: ['💰 가격이 궁금해요', '1회 체험은 무료예요. 체험 후 등록하면 <b>최대 72만 원 할인</b>돼요. 자세한 가격은 편하게 물어보세요.', '💬 가격 물어보기', 'https://talk.naver.com/w44f5y'],
+      far:   ['📍 거리가 멀어요', '세종 도담동에 있어요. 오는 길이 궁금하면 물어보세요.', '💬 오는 길 물어보기', 'https://talk.naver.com/w44f5y'],
+      time:  ['🕒 시간이 안 맞아요', '평일 아침부터 저녁, 주말까지 수업이 있어요. 시간표에서 맞는 시간을 찾아보세요.', '🗓 시간표 보기', '#timetable'],
+      hard:  ['😥 운동이 힘들어 보여요', '처음 오는 분은 코치가 옆에서 동작을 쉽게 바꿔 드려요. 무료로 한 번 해 보고 정하세요.', '전화번호만 남기고 무료체험 신청', '#lead'],
+      look:  ['👀 그냥 둘러보는 중', '천천히 보세요. 궁금한 건 언제든 물어보세요.', '', '']
+    };
+    function show(){
+      if (asked || applied || !armed || document.visibilityState !== 'visible') return;
+      if (document.getElementById('leadDim') && !document.getElementById('leadDim').hidden) return;
+      asked = true; try { localStorage.setItem('f45why', '1'); } catch(e) {}
+      engage('why_show');
+      var d = document.createElement('div'); d.className = 'why-dim';
+      var btns = Object.keys(A).map(function(k){ return '<button type="button" class="why-opt" data-why="' + k + '">' + A[k][0] + '</button>'; }).join('');
+      d.innerHTML = '<div class="why-sheet" role="dialog" aria-label="망설인 이유"><button type="button" class="why-x" aria-label="닫기">✕</button><p class="why-q">신청을 망설이는 이유가 있다면<br>하나만 골라 주세요</p><div class="why-list">' + btns + '</div><p class="why-note">익명이에요 · 누르면 바로 닫혀요</p></div>';
+      document.body.appendChild(d);
+      function close(){ d.remove(); }
+      d.addEventListener('click', function(e){
+        if (e.target === d || e.target.closest('.why-x')) { engage('why_x'); close(); return; }
+        var b = e.target.closest('[data-why]'); if (!b) return;
+        var k = b.getAttribute('data-why'); engage('why_' + k);
+        var x = A[k], sh = d.querySelector('.why-sheet');
+        sh.innerHTML = '<button type="button" class="why-x" aria-label="닫기">✕</button><p class="why-q">고마워요!</p><p class="why-ans">' + x[1] + '</p>' + (x[2] ? '<a class="why-cta" href="' + x[3] + '"' + (x[3].indexOf('http') === 0 ? ' target="_blank" rel="noopener" data-talk="1"' : '') + (x[3] === '#lead' ? ' data-lead-open="1"' : '') + '>' + x[2] + '</a>' : '');
+        var c = sh.querySelector('.why-cta');
+        if (c) c.addEventListener('click', function(ev){
+          if (x[3] === '#lead') { close(); leadOpen(ev); }
+          else if (x[3] === '#timetable') { close(); }
+          else { engage('talk'); setTimeout(close, 300); }
+        });
+      });
+    }
+    setTimeout(function(){ armed = true; }, 20000);
+    setTimeout(show, 40000);
+    window.addEventListener('scroll', function(){
+      deepest = Math.max(deepest, window.scrollY);
+      if (armed && deepest > 1200 && window.scrollY < 150) show();
+    }, {passive: true});
+  })();
   window.addEventListener('scroll', function(){
     var h = document.documentElement.scrollHeight - window.innerHeight;
     if (h <= 0) return;
